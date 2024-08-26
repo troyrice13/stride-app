@@ -1,13 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// src/components/Header.jsx
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 
-export default function Header() {
-    return(
-        <nav className="flex justify-center mt-6 bg-blue-400 text-white bg-white border-gray-200 dark:bg-gray-900">
-            <Link className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/">Home</Link>
-            <Link to="/itinerary" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ml-4">Itinerary</Link>
-            <Link to="/login" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ml-4 ml-4">Login</Link>
-            <Link to="/register" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent ml-4 ml-4">Register</Link>
-        </nav>
-    )
-}
+const Header = () => {
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
+
+  return (
+    <nav className="bg-gray-800 p-4 flex justify-between items-center">
+      <div className="text-white">
+        <Link to="/" className="text-xl font-bold">Stride</Link>
+      </div>
+      <div className="flex items-center">
+        {/* Show different menu options based on authentication status */}
+        {isAuthenticated ? (
+          <>
+            {/* Show user info and logout button if logged in */}
+            <Link className='text-white mr-4' to='/profile'>Profile</Link>
+            <button
+              onClick={() => logout({ returnTo: window.location.origin })}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            {/* Show login button if not logged in */}
+            <button
+              onClick={() => loginWithRedirect()}
+              className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
+            >
+              Login
+            </button>
+            <Link
+              to="/register"
+              className="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Register
+            </Link>
+          </>
+        )}
+      </div>
+    </nav>
+  );
+};
+
+export default Header;

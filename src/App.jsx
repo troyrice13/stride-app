@@ -7,7 +7,8 @@ import Home from './pages/Home';
 import Itinerary from './pages/Itinerary';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Header from './components/Header'
+import Header from './components/Header';
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/itinerary' element={<Itinerary />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </>
   )
