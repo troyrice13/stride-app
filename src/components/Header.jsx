@@ -17,6 +17,7 @@ const Header = () => {
           <>
             {/* Show user info and logout button if logged in */}
             <Link className='text-white mr-4' to='/profile'>Profile</Link>
+            <Link className='text-white mr-4' to='/itinerary'>Itinerary</Link>
             <button
               onClick={() => logout({ returnTo: window.location.origin })}
               className="bg-red-600 text-white px-4 py-2 rounded-lg"
