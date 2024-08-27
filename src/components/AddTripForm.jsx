@@ -14,6 +14,12 @@ export default function AddTripForm({ onSubmit }) {
 
 const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    if (new Date(formData.startDate) > new Date(formData.endDate)) {
+        alert('End date must be after the start date.');
+        return;
+    }
+
     onSubmit(formData)
     setFormData({ title: '', startDate: '', endDate: '' })
 }
@@ -56,7 +62,9 @@ return (
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-lue-500 block w-full p-2.5"
                 />
             </div>
+            <div className='flex justify-center'>
             <button type='submit' className="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 my-4">Save Trip</button>
+            </div>
         </form>
     </div>
 )
