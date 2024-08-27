@@ -8,6 +8,7 @@ import Itinerary from './pages/Itinerary';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
+import Footer from './components/Footer'
 import Profile from './pages/Profile'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/profile' element={<Profile />} />
       </Routes>
+      <Footer />
     </>
   )
 }
